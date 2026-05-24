@@ -2,201 +2,287 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I'm Sorry, Isha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry, Isha ❤️</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #2b1d1d);
-      color: white;
-      overflow-x: hidden;
-      min-height: 100vh;
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(135deg,#0f0f0f,#1a1a1a,#2b1d1d);
+      color:white;
+      overflow-x:hidden;
+      min-height:100vh;
+      scroll-behavior:smooth;
     }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.55);
-      z-index: -1;
+    .overlay{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.55);
+      z-index:-1;
     }
 
-    .container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 30px 20px;
-      position: relative;
+    .container{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:30px 20px;
+      position:relative;
     }
 
-    .heart {
-      position: fixed;
-      color: rgba(255,255,255,0.15);
-      font-size: 22px;
-      animation: float 10s linear infinite;
-      z-index: 0;
+    .heart{
+      position:fixed;
+      color:rgba(255,255,255,0.15);
+      font-size:22px;
+      animation:float 10s linear infinite;
+      z-index:0;
     }
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 0;
+    @keyframes float{
+      0%{
+        transform:translateY(100vh) scale(0.5);
+        opacity:0;
       }
-      20% {
-        opacity: 1;
+      20%{
+        opacity:1;
       }
-      100% {
-        transform: translateY(-120px) scale(1.3);
-        opacity: 0;
-      }
-    }
-
-    .title {
-      font-size: 4rem;
-      font-family: 'Dancing Script', cursive;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease;
-      color: #ffd6d6;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      max-width: 700px;
-      line-height: 1.8;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 1s;
-      color: #f5f5f5;
-    }
-
-    .photo-card {
-      margin-top: 50px;
-      width: 320px;
-      border-radius: 25px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(255,255,255,0.15);
-      transform: scale(0.8);
-      opacity: 0;
-      animation: reveal 2s ease forwards;
-      animation-delay: 2s;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .photo-card img {
-      width: 100%;
-      display: block;
-    }
-
-    .message-box {
-      margin-top: 40px;
-      max-width: 700px;
-      padding: 25px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 20px;
-      line-height: 2;
-      font-size: 1.1rem;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 3s;
-      backdrop-filter: blur(10px);
-    }
-
-    .signature {
-      margin-top: 30px;
-      font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
-      color: #ffd6d6;
-    }
-
-    .music-note {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.12);
-      padding: 12px 18px;
-      border-radius: 999px;
-      backdrop-filter: blur(8px);
-      font-size: 0.9rem;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-      100% {
-        transform: scale(1);
+      100%{
+        transform:translateY(-120px) scale(1.3);
+        opacity:0;
       }
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    .title{
+      font-size:4rem;
+      font-family:'Dancing Script',cursive;
+      margin-bottom:20px;
+      animation:fadeIn 2s ease;
+      color:#ffd6d6;
+    }
+
+    .subtitle{
+      font-size:1.1rem;
+      max-width:700px;
+      line-height:1.8;
+      opacity:0;
+      animation:fadeIn 2s ease forwards;
+      animation-delay:1s;
+      color:#f5f5f5;
+    }
+
+    .photo-card{
+      margin-top:50px;
+      width:320px;
+      border-radius:25px;
+      overflow:hidden;
+      box-shadow:0 10px 40px rgba(255,255,255,0.15);
+      transform:scale(0.8);
+      opacity:0;
+      animation:reveal 2s ease forwards;
+      animation-delay:2s;
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .photo-card img{
+      width:100%;
+      display:block;
+    }
+
+    .message-box{
+      margin-top:40px;
+      max-width:700px;
+      padding:25px;
+      background:rgba(255,255,255,0.08);
+      border-radius:20px;
+      line-height:2;
+      font-size:1.1rem;
+      opacity:0;
+      animation:fadeIn 2s ease forwards;
+      animation-delay:3s;
+      backdrop-filter:blur(10px);
+    }
+
+    .signature{
+      margin-top:30px;
+      font-family:'Dancing Script',cursive;
+      font-size:2rem;
+      color:#ffd6d6;
+    }
+
+    .music-note{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:rgba(255,255,255,0.12);
+      padding:12px 18px;
+      border-radius:999px;
+      backdrop-filter:blur(8px);
+      font-size:0.9rem;
+      animation:pulse 2s infinite;
+      z-index:999;
+    }
+
+    @keyframes pulse{
+      0%{
+        transform:scale(1);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      50%{
+        transform:scale(1.05);
+      }
+      100%{
+        transform:scale(1);
       }
     }
 
-    @keyframes reveal {
-      from {
-        opacity: 0;
-        transform: scale(0.7);
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
       }
-      to {
-        opacity: 1;
-        transform: scale(1);
+      to{
+        opacity:1;
+        transform:translateY(0);
       }
     }
 
-    .button {
-      margin-top: 35px;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ffb6b6, #ffd6d6);
-      color: #111;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s ease;
-      font-size: 1rem;
+    @keyframes reveal{
+      from{
+        opacity:0;
+        transform:scale(0.7);
+      }
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
     }
 
-    .button:hover {
-      transform: scale(1.08);
+    .button{
+      margin-top:35px;
+      padding:14px 28px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ffb6b6,#ffd6d6);
+      color:#111;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s ease;
+      font-size:1rem;
     }
 
-    .hidden-message {
-      margin-top: 25px;
-      opacity: 0;
-      transition: 1s ease;
-      font-size: 1.05rem;
-      color: #ffeaea;
+    .button:hover{
+      transform:scale(1.08);
     }
 
-    .show {
-      opacity: 1;
+    .hidden-message{
+      margin-top:25px;
+      opacity:0;
+      transition:1s ease;
+      font-size:1.05rem;
+      color:#ffeaea;
+    }
+
+    .show{
+      opacity:1;
+    }
+
+    /* SECOND PAGE */
+
+    .memories-section{
+      min-height:100vh;
+      padding:100px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .memories-title{
+      text-align:center;
+      font-size:3rem;
+      margin-bottom:70px;
+      font-family:'Dancing Script',cursive;
+      color:#ffd6d6;
+    }
+
+    .floating-gallery{
+      position:relative;
+      width:100%;
+      height:550px;
+    }
+
+    .floating-photo{
+      position:absolute;
+      width:250px;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(255,255,255,0.15);
+      animation:floatPhoto 6s ease-in-out infinite;
+    }
+
+    .floating-photo img{
+      width:100%;
+      display:block;
+    }
+
+    .photo1{
+      left:10%;
+      top:30px;
+      transform:rotate(-8deg);
+    }
+
+    .photo2{
+      right:10%;
+      top:100px;
+      transform:rotate(8deg);
+    }
+
+    .photo3{
+      left:35%;
+      top:250px;
+      transform:rotate(-5deg);
+    }
+
+    @keyframes floatPhoto{
+      0%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-20px);
+      }
+      100%{
+        transform:translateY(0px);
+      }
+    }
+
+    .long-message{
+      max-width:850px;
+      margin:120px auto 0;
+      text-align:center;
+      line-height:2.2;
+      font-size:1.15rem;
+      background:rgba(255,255,255,0.08);
+      padding:40px;
+      border-radius:25px;
+      backdrop-filter:blur(10px);
+      color:#fff5f5;
     }
 
     @media(max-width:768px){
+
       .title{
         font-size:3rem;
       }
@@ -208,14 +294,58 @@
       .message-box{
         font-size:1rem;
       }
+
+      .floating-gallery{
+        height:850px;
+      }
+
+      .floating-photo{
+        width:75%;
+      }
+
+      .photo1{
+        left:10%;
+        top:0;
+      }
+
+      .photo2{
+        right:10%;
+        top:270px;
+      }
+
+      .photo3{
+        left:12%;
+        top:540px;
+      }
+
+      .memories-title{
+        font-size:2.2rem;
+      }
+
+      .long-message{
+        margin-top:200px;
+        font-size:1rem;
+      }
+
     }
+
   </style>
 </head>
+
 <body>
 
 <div class="overlay"></div>
 
+<!-- MUSIC -->
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- FIRST PAGE -->
+
 <div class="container">
+
   <h1 class="title">I'm Sorry, Isha ❤️</h1>
 
   <p class="subtitle">
@@ -224,24 +354,29 @@
   </p>
 
   <div class="photo-card">
-    <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Prakhar and Isha" />
+    <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="">
   </div>
 
   <div class="message-box">
+
     <p>
       To the person I hurt…<br><br>
+
       I know an apology won’t fix everything.<br>
       But you deserved better from me.
       <br><br>
+
       If I could go back and change things,
       I would choose your smile over my ego every single time.
       <br><br>
+
       You matter to me more than these mistakes ever will.
     </p>
 
     <div class="signature">
       — Prakhar
     </div>
+
   </div>
 
   <button class="button" onclick="showMessage()">
@@ -250,34 +385,112 @@
 
   <div class="hidden-message" id="extraMessage">
     No matter how much time passes…<br>
-    a part of me will always hope to make things right with you. ❤️
+    a part of me will always hope to make things right with you ❤️
   </div>
+
 </div>
+
+<!-- SECOND PAGE -->
+
+<section class="memories-section">
+
+  <h2 class="memories-title">Our Beautiful Moments ✨</h2>
+
+  <div class="floating-gallery">
+
+    <div class="floating-photo photo1">
+      <img src="photo2.jpeg">
+    </div>
+
+    <div class="floating-photo photo2">
+      <img src="photo3.jpeg">
+    </div>
+
+    <div class="floating-photo photo3">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg">
+    </div>
+
+  </div>
+
+  <div class="long-message">
+
+    <p>
+
+      I was constantly checking my phone again and again…<br>
+      waiting for one notification.<br><br>
+
+      And I came running because I hoped that message was from you ❤️
+      <br><br>
+
+      I love you.<br>
+      And I’m sorry for all the misunderstandings that happened.
+      <br><br>
+
+      I should have called you more times…<br>
+      or done something better to make you understand the situation.
+      <br><br>
+
+      You said yesterday what all have you done in the past
+      and still you let go of everything.
+      <br><br>
+
+      Thank you for that.
+      <br><br>
+
+      I’m sorry you had to go through all of this.
+      Maybe I wasn’t good enough for you at that time…
+      <br><br>
+
+      But I’m trying every single day
+      to become someone who gives you
+      a very happy life ahead ❤️
+
+    </p>
+
+  </div>
+
+</section>
 
 <div class="music-note">
   🎵 Little More Time — Niall Horan
 </div>
 
 <script>
+
+  const music = document.getElementById("bgMusic");
+
+  document.body.addEventListener("click", () => {
+    music.play();
+  }, { once: true });
+
   function showMessage() {
     document.getElementById('extraMessage').classList.add('show');
   }
 
   function createHearts() {
+
     const heart = document.createElement('div');
+
     heart.classList.add('heart');
+
     heart.innerHTML = '❤';
+
     heart.style.left = Math.random() * window.innerWidth + 'px';
+
     heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+
     heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+
     document.body.appendChild(heart);
 
     setTimeout(() => {
       heart.remove();
     }, 10000);
+
   }
 
   setInterval(createHearts, 500);
+
 </script>
 
 </body>
