@@ -201,6 +201,33 @@
       opacity:1;
     }
 
+    .nav-button{
+      position:fixed;
+      bottom:30px;
+      padding:12px 24px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ffb6b6,#ffd6d6);
+      color:#111;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s ease;
+      z-index:100;
+      font-size:1rem;
+    }
+
+    .nav-button:hover{
+      transform:scale(1.08);
+    }
+
+    .nav-prev{
+      left:30px;
+    }
+
+    .nav-next{
+      right:30px;
+    }
+
     /* SECOND PAGE */
 
     .memories-section{
@@ -388,6 +415,8 @@
     a part of me will always hope to make things right with you ❤️
   </div>
 
+  <button class="nav-button nav-next" onclick="scrollToPage2()">Next Page →</button>
+
 </div>
 
 <!-- SECOND PAGE -->
@@ -399,15 +428,15 @@
   <div class="floating-gallery">
 
     <div class="floating-photo photo1">
-      <img src="photo2.jpeg">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Our Memory 1">
     </div>
 
     <div class="floating-photo photo2">
-      <img src="photo3.jpeg">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Our Memory 2">
     </div>
 
     <div class="floating-photo photo3">
-      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Our Memory 3">
     </div>
 
   </div>
@@ -448,6 +477,9 @@
     </p>
 
   </div>
+
+  <button class="nav-button nav-prev" onclick="scrollToPage1()">← Previous Page</button>
+  <button class="nav-button nav-next" onclick="scrollToPage2()" style="display:none;">Next Page →</button>
 
 </section>
 
@@ -490,6 +522,14 @@
   }
 
   setInterval(createHearts, 500);
+
+  function scrollToPage1() {
+    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function scrollToPage2() {
+    document.querySelector('.memories-section').scrollIntoView({ behavior: 'smooth' });
+  }
 
 </script>
 
