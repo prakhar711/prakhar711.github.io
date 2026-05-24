@@ -4,534 +4,784 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I'm Sorry, Isha ❤️</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Italiana&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
 
   <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    :root {
+      --rose:       #e8a0a0;
+      --rose-deep:  #c96b6b;
+      --rose-pale:  #f5dada;
+      --gold:       #d4a96a;
+      --cream:      #fdf6f0;
+      --ink:        #1a0f0f;
+      --ink-mid:    #2e1a1a;
+      --glass:      rgba(255,255,255,0.05);
+      --glass-border: rgba(255,255,255,0.12);
     }
 
-    body{
-      font-family:'Poppins',sans-serif;
-      background:linear-gradient(135deg,#0f0f0f,#1a1a1a,#2b1d1d);
-      color:white;
-      overflow-x:hidden;
-      min-height:100vh;
-      scroll-behavior:smooth;
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--ink);
+      color: var(--cream);
+      overflow-x: hidden;
+      cursor: none;
     }
 
-    .overlay{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.55);
-      z-index:-1;
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--rose);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.3s;
+      mix-blend-mode: difference;
+    }
+    .cursor-aura {
+      width: 40px; height: 40px;
+      border: 1px solid rgba(232,160,160,0.4);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.4s ease, width 0.3s, height 0.3s, opacity 0.3s;
     }
 
-    .container{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:30px 20px;
-      position:relative;
+    /* ── CANVAS PARTICLES ── */
+    #particle-canvas {
+      position: fixed; inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .heart{
-      position:fixed;
-      color:rgba(255,255,255,0.15);
-      font-size:22px;
-      animation:float 10s linear infinite;
-      z-index:0;
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    @keyframes float{
-      0%{
-        transform:translateY(100vh) scale(0.5);
-        opacity:0;
-      }
-      20%{
-        opacity:1;
-      }
-      100%{
-        transform:translateY(-120px) scale(1.3);
-        opacity:0;
-      }
+    /* ── SECTIONS ── */
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      z-index: 2;
     }
 
-    .title{
-      font-size:4rem;
-      font-family:'Dancing Script',cursive;
-      margin-bottom:20px;
-      animation:fadeIn 2s ease;
-      color:#ffd6d6;
+    /* ══════════════════════════════════════════
+       PAGE 1 — HERO
+    ══════════════════════════════════════════ */
+    #page1 {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
     }
 
-    .subtitle{
-      font-size:1.1rem;
-      max-width:700px;
-      line-height:1.8;
-      opacity:0;
-      animation:fadeIn 2s ease forwards;
-      animation-delay:1s;
-      color:#f5f5f5;
+    /* ambient gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 500px; height: 500px; background: #8b2020; top: -150px; left: -150px; animation-delay: 0s; }
+    .orb2 { width: 350px; height: 350px; background: #c96b6b; bottom: -100px; right: -100px; animation-delay: -4s; }
+    .orb3 { width: 250px; height: 250px; background: #d4a96a; top: 40%; left: 60%; animation-delay: -8s; }
+
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(40px, 30px) scale(1.1); }
     }
 
-    .photo-card{
-      margin-top:50px;
-      width:320px;
-      border-radius:25px;
-      overflow:hidden;
-      box-shadow:0 10px 40px rgba(255,255,255,0.15);
-      transform:scale(0.8);
-      opacity:0;
-      animation:reveal 2s ease forwards;
-      animation-delay:2s;
-      backdrop-filter:blur(8px);
-      border:1px solid rgba(255,255,255,0.1);
+    /* cinematic vignette */
+    #page1::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
     }
 
-    .photo-card img{
-      width:100%;
-      display:block;
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 40px 24px 120px;
+      max-width: 860px;
+      width: 100%;
     }
 
-    .message-box{
-      margin-top:40px;
-      max-width:700px;
-      padding:25px;
-      background:rgba(255,255,255,0.08);
-      border-radius:20px;
-      line-height:2;
-      font-size:1.1rem;
-      opacity:0;
-      animation:fadeIn 2s ease forwards;
-      animation-delay:3s;
-      backdrop-filter:blur(10px);
+    /* eyebrow */
+    .eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: riseIn 1.2s ease forwards 0.4s;
+      margin-bottom: 18px;
     }
 
-    .signature{
-      margin-top:30px;
-      font-family:'Dancing Script',cursive;
-      font-size:2rem;
-      color:#ffd6d6;
+    /* MAIN TITLE */
+    .hero-title {
+      font-family: 'Italiana', serif;
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      line-height: 1.0;
+      text-align: center;
+      color: var(--rose-pale);
+      opacity: 0;
+      animation: riseIn 1.4s ease forwards 0.7s;
+      letter-spacing: -0.01em;
+      text-shadow: 0 0 80px rgba(201,107,107,0.4);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--rose);
     }
 
-    .music-note{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:rgba(255,255,255,0.12);
-      padding:12px 18px;
-      border-radius:999px;
-      backdrop-filter:blur(8px);
-      font-size:0.9rem;
-      animation:pulse 2s infinite;
-      z-index:999;
+    /* divider */
+    .divider {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--rose-deep), transparent);
+      margin: 32px auto;
+      opacity: 0;
+      animation: riseIn 1s ease forwards 1.3s;
     }
 
-    @keyframes pulse{
-      0%{
-        transform:scale(1);
-      }
-      50%{
-        transform:scale(1.05);
-      }
-      100%{
-        transform:scale(1);
-      }
+    /* photo frame */
+    .photo-frame {
+      position: relative;
+      width: clamp(200px, 35vw, 300px);
+      opacity: 0;
+      animation: riseIn 1.6s ease forwards 1.5s;
+      margin-bottom: 36px;
+    }
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--rose-deep), var(--gold));
+      z-index: -1;
+    }
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border-radius: 12px;
+      border: 1px solid rgba(212,169,106,0.2);
+      z-index: -2;
+    }
+    .photo-frame img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+      filter: sepia(15%) contrast(1.05) brightness(0.95);
     }
 
-    @keyframes fadeIn{
-      from{
-        opacity:0;
-        transform:translateY(20px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+    /* subtitle */
+    .hero-sub {
+      font-weight: 300;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      line-height: 2;
+      text-align: center;
+      max-width: 560px;
+      color: rgba(245,218,218,0.8);
+      opacity: 0;
+      animation: riseIn 1.4s ease forwards 2s;
+    }
+    .hero-sub strong {
+      font-weight: 500;
+      color: var(--rose-pale);
     }
 
-    @keyframes reveal{
-      from{
-        opacity:0;
-        transform:scale(0.7);
-      }
-      to{
-        opacity:1;
-        transform:scale(1);
-      }
+    /* message card */
+    .message-card {
+      margin-top: 44px;
+      padding: 40px 48px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+      backdrop-filter: blur(20px);
+      max-width: 620px;
+      width: 100%;
+      text-align: left;
+      opacity: 0;
+      animation: riseIn 1.4s ease forwards 2.5s;
+      position: relative;
+    }
+    .message-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -20px; left: 32px;
+      font-family: 'Italiana', serif;
+      font-size: 6rem;
+      color: var(--rose-deep);
+      opacity: 0.35;
+      line-height: 1;
+    }
+    .message-card p {
+      font-weight: 300;
+      line-height: 2.1;
+      font-size: 1.05rem;
+      color: rgba(253,246,240,0.85);
+    }
+    .message-card p + p { margin-top: 20px; }
+
+    .signature {
+      margin-top: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--rose);
+      text-align: right;
     }
 
-    .button{
-      margin-top:35px;
-      padding:14px 28px;
-      border:none;
-      border-radius:999px;
-      background:linear-gradient(135deg,#ffb6b6,#ffd6d6);
-      color:#111;
-      font-weight:600;
-      cursor:pointer;
-      transition:0.3s ease;
-      font-size:1rem;
+    /* CTA button */
+    .cta-btn {
+      margin-top: 40px;
+      padding: 16px 44px;
+      background: transparent;
+      border: 1px solid var(--rose-deep);
+      color: var(--rose-pale);
+      border-radius: 2px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+      opacity: 0;
+      animation: riseIn 1.2s ease forwards 3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--rose-deep), var(--rose));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .cta-btn:hover::before { transform: scaleX(1); }
+    .cta-btn span { position: relative; z-index: 1; }
+    .cta-btn:hover { color: var(--ink); box-shadow: 0 0 40px rgba(201,107,107,0.4); }
+
+    /* hidden message */
+    .hidden-reveal {
+      margin-top: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--rose-pale);
+      text-align: center;
+      max-width: 520px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      pointer-events: none;
+    }
+    .hidden-reveal.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: riseIn 1s ease forwards 4s;
+      z-index: 4;
+    }
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50%       { opacity: 1;   transform: scaleY(1); }
     }
 
-    .button:hover{
-      transform:scale(1.08);
+    /* ══════════════════════════════════════════
+       PAGE 2 — MEMORIES
+    ══════════════════════════════════════════ */
+    #page2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 24px 160px;
+      background: linear-gradient(180deg, var(--ink) 0%, #200e0e 100%);
     }
 
-    .hidden-message{
-      margin-top:25px;
-      opacity:0;
-      transition:1s ease;
-      font-size:1.05rem;
-      color:#ffeaea;
+    .section-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
     }
 
-    .show{
-      opacity:1;
+    .section-title {
+      font-family: 'Italiana', serif;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      text-align: center;
+      color: var(--rose-pale);
+      letter-spacing: 0.01em;
+      text-shadow: 0 0 60px rgba(201,107,107,0.3);
+      margin-bottom: 70px;
     }
 
-    .nav-button{
-      position:fixed;
-      bottom:30px;
-      padding:12px 24px;
-      border:none;
-      border-radius:999px;
-      background:linear-gradient(135deg,#ffb6b6,#ffd6d6);
-      color:#111;
-      font-weight:600;
-      cursor:pointer;
-      transition:0.3s ease;
-      z-index:100;
-      font-size:1rem;
+    /* Gallery — editorial masonry-style */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+      max-width: 900px;
+      width: 100%;
     }
 
-    .nav-button:hover{
-      transform:scale(1.08);
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      cursor: none;
+    }
+    .gallery-item:nth-child(1) { grid-row: 1 / 3; }
+    .gallery-item:nth-child(2) { aspect-ratio: 4/3; }
+    .gallery-item:nth-child(3) { aspect-ratio: 4/3; }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(20%) contrast(1.05) brightness(0.9);
+      transition: transform 0.7s ease, filter 0.7s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: sepia(5%) contrast(1.1) brightness(1);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,5,5,0.6) 0%, transparent 50%);
+      pointer-events: none;
     }
 
-    .nav-prev{
-      left:30px;
+    /* gold corner accents */
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: 10px; left: 10px; right: 10px; bottom: 10px;
+      border: 1px solid rgba(212,169,106,0);
+      transition: border-color 0.5s;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .gallery-item:hover::before { border-color: rgba(212,169,106,0.35); }
+
+    /* long letter */
+    .letter-wrap {
+      max-width: 680px;
+      width: 100%;
+      margin-top: 90px;
+      position: relative;
+    }
+    .letter-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--rose-deep), transparent);
     }
 
-    .nav-next{
-      right:30px;
+    .letter {
+      padding: 50px 56px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid var(--glass-border);
+      border-radius: 3px;
+      backdrop-filter: blur(16px);
     }
 
-    /* SECOND PAGE */
+    .letter p {
+      font-weight: 300;
+      line-height: 2.3;
+      font-size: 1.05rem;
+      color: rgba(245,218,218,0.82);
+    }
+    .letter p + p { margin-top: 24px; }
 
-    .memories-section{
-      min-height:100vh;
-      padding:100px 20px;
-      position:relative;
-      overflow:hidden;
+    .letter .highlight {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--rose-pale);
+      display: block;
+      margin: 8px 0;
     }
 
-    .memories-title{
-      text-align:center;
-      font-size:3rem;
-      margin-bottom:70px;
-      font-family:'Dancing Script',cursive;
-      color:#ffd6d6;
+    /* ── NAV ARROWS ── */
+    .nav-arrow {
+      position: fixed;
+      bottom: 36px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--rose-pale);
+      backdrop-filter: blur(12px);
+      padding: 14px 30px;
+      border-radius: 2px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: none;
+      z-index: 200;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-arrow:hover { background: rgba(201,107,107,0.15); }
+    .nav-arrow.left  { left: 36px; }
+    .nav-arrow.right { right: 36px; }
+
+    /* ── MUSIC PILL ── */
+    .music-pill {
+      position: fixed;
+      top: 28px; right: 28px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      backdrop-filter: blur(16px);
+      z-index: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.55);
+      animation: riseIn 1s ease forwards 3.5s;
+      opacity: 0;
+    }
+    .music-bar {
+      display: flex; align-items: flex-end; gap: 2px; height: 14px;
+    }
+    .music-bar span {
+      display: block; width: 2px;
+      background: var(--rose);
+      border-radius: 1px;
+      animation: bar 1.2s ease-in-out infinite;
+    }
+    .music-bar span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+    .music-bar span:nth-child(2) { height: 12px; animation-delay: 0.2s; }
+    .music-bar span:nth-child(3) { height: 8px;  animation-delay: 0.4s; }
+    .music-bar span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+    @keyframes bar {
+      0%, 100% { transform: scaleY(0.4); }
+      50%       { transform: scaleY(1); }
     }
 
-    .floating-gallery{
-      position:relative;
-      width:100%;
-      height:550px;
+    /* ── ANIMATIONS ── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .floating-photo{
-      position:absolute;
-      width:250px;
-      border-radius:20px;
-      overflow:hidden;
-      box-shadow:0 10px 30px rgba(255,255,255,0.15);
-      animation:floatPhoto 6s ease-in-out infinite;
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
 
-    .floating-photo img{
-      width:100%;
-      display:block;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .message-card { padding: 30px 24px; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(1) { grid-row: auto; aspect-ratio: 4/3; }
+      .letter { padding: 32px 24px; }
+      .nav-arrow { font-size: 0.65rem; padding: 12px 20px; bottom: 24px; }
+      .nav-arrow.left  { left: 16px; }
+      .nav-arrow.right { right: 16px; }
     }
-
-    .photo1{
-      left:10%;
-      top:30px;
-      transform:rotate(-8deg);
-    }
-
-    .photo2{
-      right:10%;
-      top:100px;
-      transform:rotate(8deg);
-    }
-
-    .photo3{
-      left:35%;
-      top:250px;
-      transform:rotate(-5deg);
-    }
-
-    @keyframes floatPhoto{
-      0%{
-        transform:translateY(0px);
-      }
-      50%{
-        transform:translateY(-20px);
-      }
-      100%{
-        transform:translateY(0px);
-      }
-    }
-
-    .long-message{
-      max-width:850px;
-      margin:120px auto 0;
-      text-align:center;
-      line-height:2.2;
-      font-size:1.15rem;
-      background:rgba(255,255,255,0.08);
-      padding:40px;
-      border-radius:25px;
-      backdrop-filter:blur(10px);
-      color:#fff5f5;
-    }
-
-    @media(max-width:768px){
-
-      .title{
-        font-size:3rem;
-      }
-
-      .photo-card{
-        width:90%;
-      }
-
-      .message-box{
-        font-size:1rem;
-      }
-
-      .floating-gallery{
-        height:850px;
-      }
-
-      .floating-photo{
-        width:75%;
-      }
-
-      .photo1{
-        left:10%;
-        top:0;
-      }
-
-      .photo2{
-        right:10%;
-        top:270px;
-      }
-
-      .photo3{
-        left:12%;
-        top:540px;
-      }
-
-      .memories-title{
-        font-size:2.2rem;
-      }
-
-      .long-message{
-        margin-top:200px;
-        font-size:1rem;
-      }
-
-    }
-
   </style>
 </head>
-
 <body>
 
-<div class="overlay"></div>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-aura" id="cursorAura"></div>
+
+<!-- CANVAS -->
+<canvas id="particle-canvas"></canvas>
 
 <!-- MUSIC -->
-
 <audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- FIRST PAGE -->
-
-<div class="container">
-
-  <h1 class="title">I'm Sorry, Isha ❤️</h1>
-
-  <p class="subtitle">
-    Some people become a beautiful part of your life so quietly…
-    that you only realize their value when you hurt them.
-  </p>
-
-  <div class="photo-card">
-    <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="">
+<!-- MUSIC PILL -->
+<div class="music-pill">
+  <div class="music-bar">
+    <span></span><span></span><span></span><span></span>
   </div>
-
-  <div class="message-box">
-
-    <p>
-      To the person I hurt…<br><br>
-
-      I know an apology won’t fix everything.<br>
-      But you deserved better from me.
-      <br><br>
-
-      If I could go back and change things,
-      I would choose your smile over my ego every single time.
-      <br><br>
-
-      You matter to me more than these mistakes ever will.
-    </p>
-
-    <div class="signature">
-      — Prakhar
-    </div>
-
-  </div>
-
-  <button class="button" onclick="showMessage()">
-    Click if you still believe in us ✨
-  </button>
-
-  <div class="hidden-message" id="extraMessage">
-    No matter how much time passes…<br>
-    a part of me will always hope to make things right with you ❤️
-  </div>
-
-  <button class="nav-button nav-next" onclick="scrollToPage2()">Next Page →</button>
-
+  Little More Time — Niall Horan
 </div>
 
-<!-- SECOND PAGE -->
+<!-- ═══════════════════ PAGE 1 ═══════════════════ -->
+<section id="page1">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-<section class="memories-section">
+  <div class="hero-inner">
+    <p class="eyebrow">A letter from the heart</p>
 
-  <h2 class="memories-title">Our Beautiful Moments ✨</h2>
+    <h1 class="hero-title">I'm&nbsp;Sorry,<br><em>Isha</em></h1>
 
-  <div class="floating-gallery">
+    <div class="divider"></div>
 
-    <div class="floating-photo photo1">
-      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Our Memory 1">
+    <div class="photo-frame">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Isha">
     </div>
 
-    <div class="floating-photo photo2">
-      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Our Memory 2">
-    </div>
-
-    <div class="floating-photo photo3">
-      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Our Memory 3">
-    </div>
-
-  </div>
-
-  <div class="long-message">
-
-    <p>
-
-      I was constantly checking my phone again and again…<br>
-      waiting for one notification.<br><br>
-
-      And I came running because I hoped that message was from you ❤️
-      <br><br>
-
-      I love you.<br>
-      And I’m sorry for all the misunderstandings that happened.
-      <br><br>
-
-      I should have called you more times…<br>
-      or done something better to make you understand the situation.
-      <br><br>
-
-      You said yesterday what all have you done in the past
-      and still you let go of everything.
-      <br><br>
-
-      Thank you for that.
-      <br><br>
-
-      I’m sorry you had to go through all of this.
-      Maybe I wasn’t good enough for you at that time…
-      <br><br>
-
-      But I’m trying every single day
-      to become someone who gives you
-      a very happy life ahead ❤️
-
+    <p class="hero-sub">
+      Some people enter your life so quietly,<br>
+      <strong>so gently</strong> — that you only realise their value<br>
+      when silence takes the place of their voice.
     </p>
 
+    <div class="message-card">
+      <p>
+        To the person I hurt the most —<br>
+        I know an apology cannot rewrite what happened.<br>
+        But you deserved so much better from me.
+      </p>
+      <p>
+        If I could travel back to every moment I made you feel small —
+        I would choose your smile over my pride,
+        every single time, without hesitation.
+      </p>
+      <p>
+        You matter to me more than all my mistakes combined.
+      </p>
+      <div class="signature">— Prakhar</div>
+    </div>
+
+    <button class="cta-btn" onclick="showHidden()">
+      <span>Click if you still believe in us ✦</span>
+    </button>
+
+    <p class="hidden-reveal" id="hiddenReveal">
+      No matter how much time passes —<br>
+      a part of me will always hope to make things right with you ❤
+    </p>
   </div>
 
-  <button class="nav-button nav-prev" onclick="scrollToPage1()">← Previous Page</button>
-  <button class="nav-button nav-next" onclick="scrollToPage2()" style="display:none;">Next Page →</button>
-
+  <div class="scroll-hint">
+    <span>Our Story</span>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
-<div class="music-note">
-  🎵 Little More Time — Niall Horan
-</div>
+<!-- ═══════════════════ PAGE 2 ═══════════════════ -->
+<section id="page2">
+  <p class="section-eyebrow reveal">the moments we built</p>
+  <h2 class="section-title reveal reveal-delay-1">Our Beautiful Moments</h2>
+
+  <div class="gallery reveal reveal-delay-2">
+    <div class="gallery-item">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Memory 1">
+    </div>
+    <div class="gallery-item">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Memory 2">
+    </div>
+    <div class="gallery-item">
+      <img src="WhatsApp Image 2026-04-15 at 12.39.36 PM.jpeg" alt="Memory 3">
+    </div>
+  </div>
+
+  <div class="letter-wrap reveal reveal-delay-3">
+    <div class="letter">
+      <p>
+        I was constantly checking my phone — again and again —
+        waiting for one notification.
+        <span class="highlight">And I came running, because I hoped that message was from you.</span>
+      </p>
+      <p>
+        I love you. And I'm sorry for every misunderstanding that grew
+        between us — all the times silence did the damage words never could.
+      </p>
+      <p>
+        I should have called more. I should have tried harder.
+        I should have made you feel as certain of me as I was certain of you.
+      </p>
+      <p>
+        You told me what you'd carried — all that you'd let go of — and still chose to stay.
+        <span class="highlight">Thank you. Thank you for that grace.</span>
+      </p>
+      <p>
+        I'm sorry you had to go through any of it.
+        Maybe I wasn't the person you needed then.
+        But I am trying — every single day — to become someone
+        who gives you a truly happy life ahead.
+      </p>
+      <div class="signature" style="margin-top:36px;">— Always, Prakhar ❤</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<button class="nav-arrow right" onclick="document.getElementById('page2').scrollIntoView({behavior:'smooth'})">
+  Our Story ↓
+</button>
+<button class="nav-arrow left" id="backBtn" style="display:none;"
+  onclick="document.getElementById('page1').scrollIntoView({behavior:'smooth'})">
+  ↑ Back
+</button>
 
 <script>
+  /* ─── CURSOR ─── */
+  const cursor = document.getElementById('cursor');
+  const aura   = document.getElementById('cursorAura');
+  let mx = 0, my = 0, ax = 0, ay = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor() {
+    ax += (mx - ax) * 0.15;
+    ay += (my - ay) * 0.15;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+    aura.style.transform   = `translate(${ax - 20}px, ${ay - 20}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
 
-  const music = document.getElementById("bgMusic");
+  document.querySelectorAll('button, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform += ' scale(1.8)';
+      aura.style.width = '60px'; aura.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      aura.style.width = '40px'; aura.style.height = '40px';
+    });
+  });
 
-  document.body.addEventListener("click", () => {
-    music.play();
+  /* ─── CANVAS PARTICLES ─── */
+  const canvas = document.getElementById('particle-canvas');
+  const ctx    = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const HEARTS = ['❤', '♡', '✦', '✧'];
+  const particles = [];
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x   = Math.random() * canvas.width;
+      this.y   = canvas.height + 20;
+      this.size = Math.random() * 14 + 8;
+      this.speed = Math.random() * 0.6 + 0.3;
+      this.drift = (Math.random() - 0.5) * 0.5;
+      this.opacity = 0;
+      this.maxOpacity = Math.random() * 0.25 + 0.05;
+      this.char = HEARTS[Math.floor(Math.random() * HEARTS.length)];
+      this.life = 0;
+      this.maxLife = Math.random() * 300 + 200;
+    }
+    update() {
+      this.y -= this.speed;
+      this.x += this.drift;
+      this.life++;
+      const t = this.life / this.maxLife;
+      this.opacity = t < 0.2 ? (t / 0.2) * this.maxOpacity
+                   : t > 0.7 ? ((1-t)/0.3) * this.maxOpacity
+                   : this.maxOpacity;
+      if (this.life >= this.maxLife) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = '#e8a0a0';
+      ctx.font = `${this.size}px serif`;
+      ctx.fillText(this.char, this.x, this.y);
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < 60; i++) {
+    const p = new Particle();
+    p.life = Math.random() * p.maxLife; // stagger
+    p.y = Math.random() * canvas.height;
+    particles.push(p);
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  /* ─── MUSIC ─── */
+  document.body.addEventListener('click', () => {
+    document.getElementById('bgMusic').play();
   }, { once: true });
 
-  function showMessage() {
-    document.getElementById('extraMessage').classList.add('show');
+  /* ─── CTA REVEAL ─── */
+  function showHidden() {
+    document.getElementById('hiddenReveal').classList.add('show');
   }
 
-  function createHearts() {
+  /* ─── SCROLL REVEAL ─── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer  = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
 
-    const heart = document.createElement('div');
-
-    heart.classList.add('heart');
-
-    heart.innerHTML = '❤';
-
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-
-    heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
-
-    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 10000);
-
-  }
-
-  setInterval(createHearts, 500);
-
-  function scrollToPage1() {
-    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function scrollToPage2() {
-    document.querySelector('.memories-section').scrollIntoView({ behavior: 'smooth' });
-  }
-
+  /* ─── NAV BACK BUTTON TOGGLE ─── */
+  const backBtn = document.getElementById('backBtn');
+  const page2   = document.getElementById('page2');
+  const pageObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      backBtn.style.display = e.isIntersecting ? 'block' : 'none';
+    });
+  }, { threshold: 0.2 });
+  pageObs.observe(page2);
 </script>
-
 </body>
 </html>
